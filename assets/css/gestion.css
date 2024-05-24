@@ -1,0 +1,31 @@
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+.content {
+    position: up;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+/* Optional: To make sure content is readable on all backgrounds */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+main{
+    background: url('/assets/img/bgraund.jpg') top center;
+    background-size: cover;
+    position: relative;
+
+}
+.card_transp {
+    background: #ffffffab !important;
+}

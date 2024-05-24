@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ESP32 con CSS</title>
+    <!--REFRESCAR CADA UN SEGUNDO  <meta http-equiv="refresh" content="5">-->
+    <base href="/">
+    <link href="data/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="data/gestion.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+
+    <div class="container" style="display: block; width: 260px; margin-bottom: 10px; float: left;">
+
+        <div style="width: 260px; display: flex; align-items: center; justify-content: center; border: 5px double #000000;">
+            <h1 style="font-family: 'Times New Roman'; font-style: oblique;">Control Board</h1>
+        </div>
+
+        <div style="display: inline-flex; border: 5px double black;">
+
+            <div>
+                <input type="button" class="boton" value="Calibrar" id="calibracion" name="calibracion">
+                <div class="led" style="margin-bottom: 30px" id="calib_state_led" %calib_state%></div>
+                <!--calib state marcador de posicion puede ser alterado desde el backend-->
+            </div>
+
+            <div>
+                <input type="button" class="boton" value="confirma" id="confirmar" name="confirmar">
+                <div class="led" style="margin-bottom: 30px;" id="conf_state_led" %confirm_state%></div>
+                <!--confirm_state state marcador de posicion puede ser alterado desde el backend-->
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container" style="display: block; margin-right: 50px; width: 274px; float: right;">
+
+        <div style="align-items: center; display: flex; justify-content:center; border: 2px solid #000000; width: 274px;">
+            <h1 style="align-content: center; font-family: 'Times New Roman'; font-style: oblique;">Board state</h1>
+        </div>
+
+        <div style="display: inline-flex; border: 2px solid #000000;">
+
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="led" style="margin: 20px; text-align: center;" id="ledtara"></div>
+                <h6 style="text-align: center; font-family: 'Times New Roman'; font-style: oblique ">Tara</h6>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; ">
+                <div class="led " style="margin: 20px; text-align: center; " id="ledset " %ledset% "></div>
+                <h6 style="text-align: center; font-family: 'Times New Roman'; font-style: oblique; ">Set</h6>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; ">
+                <div class="led " style="margin: 20px; text-align: center; " id="led1 " %ledss% "></div>
+                <h6 style="text-align: center; font-family: 'Times New Roman'; font-style: oblique; ">Lnnmed3</h6>
+            </div>
+
+        </div>
+
+        <div style="align-items: center; display: flex; justify-content:center; border: 2px solid #000000; width: 274px; ">
+            <h1 style="align-content: center; font-family: 'Times New Roman'; font-style: oblique; ">Visualizar peso
+            </h1>
+        </div>
+
+    </div>
+
+
+    <script src="data/customjs.js "></script>
+
+</body>
+
+
+</html>

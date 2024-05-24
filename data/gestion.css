@@ -1,0 +1,85 @@
+            body {
+                font-family: 'Times New Roman';
+                background: url("/data/bgraund.jpg");
+                background-position: top;
+                background-size: 1000px;
+            }
+            
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: 'Raleway';
+            }
+            
+            p {
+                line-height: 1.75;
+            }
+            
+            .text-faded {
+                color: rgba(255, 0, 0, 0.3);
+            }
+            
+            footer {
+                background-color: #777;
+                padding: 10px;
+                text-align: center;
+                color: white;
+                font-family: 'Times New Roman';
+            }
+            
+            .container {
+                margin: 5px 0px 5px 0px;
+                width: auto;
+                height: auto;
+            }
+            
+            .container>div {
+                background-color: #e7ebec;
+                align-items: center;
+                justify-content: center;
+                margin: 0px;
+                /* Espacio entre los elementos */
+            }
+            
+            .boton {
+                border: 5px double#feb585;
+                /*anchura,estiloycolorborde*/
+                padding: 15px;
+                /*espacioalrededortexto*/
+                background-color: #d7d9ce;
+                /*colorbotón*/
+                color: #000000;
+                /*colortexto*/
+                text-decoration: none;
+                /*decoracióntexto*/
+                text-transform: lowercase;
+                /*capitalizacióntexto*/
+                font-family: 'Times New Roman';
+                font-style: oblique;
+                /*tipografíatexto*/
+                border-radius: 50px;
+                /*bordesredondos*/
+                /*agregabordeinferior*/
+                margin: 15px;
+            }
+            
+            .boton:active {
+                background-color: #99FB68;
+            }
+            
+            .led {
+                width: 50px;
+                /*AjustaeltamañodelLED*/
+                height: 50px;
+                /*AjustaeltamañodelLED*/
+                border-radius: 50%;
+                /*DaformadecírculoparasimularunLED*/
+                background-color: rgb(147, 130, 130);
+                /*CambiaelcolordelLEDarojo(puedesajustarelcolorsegúnseanecesario)*/
+                box-shadow: 0 0 15px 5px rgba(209, 239, 40, 0.7);
+                /*Agregaunefectodebrillo/destelloalLED*/
+                margin: auto;
+            }
