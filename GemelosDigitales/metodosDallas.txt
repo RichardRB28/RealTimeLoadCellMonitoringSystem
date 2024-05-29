@@ -1,0 +1,101 @@
+La librería `DallasTemperature` es utilizada para trabajar con sensores de temperatura de la familia Dallas (DS18B20, DS18S20, etc.) en Arduino. A continuación, te explicaré qué hace cada uno de los métodos listados en el archivo `DallasTemperature.h` desde la línea 89 del repositorio que proporcionaste.
+
+### Métodos de la clase `DallasTemperature`
+
+1. **`DallasTemperature(OneWire*)`**: Constructor que inicializa el objeto `DallasTemperature` utilizando un puntero a un objeto `OneWire`. El objeto `OneWire` controla la comunicación con los sensores de temperatura.
+
+2. **`void begin(void)`**: Inicializa la biblioteca. Debe llamarse en la función `setup()` de tu programa de Arduino. Esta función prepara la comunicación y detecta los sensores conectados al bus OneWire.
+
+3. **`uint8_t getDeviceCount(void)`**: Devuelve el número de sensores de temperatura detectados en el bus OneWire.
+
+4. **`bool validAddress(const uint8_t*)`**: Verifica si la dirección dada (un array de 8 bytes) es una dirección válida para un sensor de temperatura.
+
+5. **`bool validFamily(const uint8_t*)`**: Verifica si la dirección dada pertenece a la familia de sensores de temperatura Dallas (DS18B20).
+
+6. **`bool getAddress(uint8_t*, uint8_t)`**: Obtiene la dirección del sensor en el índice especificado y la almacena en el array proporcionado. Devuelve `true` si se encuentra un sensor en ese índice.
+
+7. **`bool isConnected(const uint8_t*)`**: Verifica si el sensor con la dirección dada está conectado y responde en el bus OneWire.
+
+8. **`bool isConnected(const uint8_t*, uint8_t*)`**: Similar al anterior, pero también lee los datos del sensor en el array proporcionado.
+
+9. **`void readScratchPad(const uint8_t*, uint8_t*)`**: Lee la memoria interna (scratchpad) del sensor y almacena los datos en el array proporcionado.
+
+10. **`void writeScratchPad(const uint8_t*, const uint8_t*)`**: Escribe datos en la memoria interna (scratchpad) del sensor desde el array proporcionado.
+
+11. **`bool readPowerSupply(const uint8_t*)`**: Verifica si el sensor está usando alimentación parasitaria o una fuente de alimentación externa.
+
+12. **`uint8_t getResolution(void)`**: Devuelve la resolución del sensor en bits. Esta es la configuración global que se aplica a todos los sensores si no se especifica uno.
+
+13. **`void setResolution(uint8_t)`**: Configura la resolución para todos los sensores en el bus OneWire.
+
+14. **`uint8_t getResolution(const uint8_t*)`**: Devuelve la resolución del sensor especificado por la dirección.
+
+15. **`bool setResolution(const uint8_t*, uint8_t)`**: Configura la resolución del sensor especificado por la dirección.
+
+16. **`void setWaitForConversion(bool)`**: Configura si el código debe esperar (bloquear) mientras se realiza la conversión de temperatura. `true` para esperar, `false` para continuar inmediatamente.
+
+17. **`bool getWaitForConversion(void)`**: Devuelve `true` si el código está configurado para esperar (bloquear) durante la conversión de temperatura, `false` de lo contrario.
+
+18. **`void setCheckForConversion(bool)`**: Configura si el código debe verificar si la conversión de temperatura está completa antes de intentar leer la temperatura.
+
+19. **`bool getCheckForConversion(void)`**: Devuelve `true` si el código está configurado para verificar si la conversión de temperatura está completa antes de leer la temperatura.
+
+20. **`void requestTemperatures(void)`**: Envía un comando a todos los sensores en el bus para iniciar la conversión de temperatura.
+
+21. **`bool requestTemperaturesByAddress(const uint8_t*)`**: Envía un comando al sensor con la dirección especificada para iniciar la conversión de temperatura. Devuelve `true` si el comando se envió correctamente.
+
+22. **`bool requestTemperaturesByIndex(uint8_t)`**: Envía un comando al sensor en el índice especificado para iniciar la conversión de temperatura. Devuelve `true` si el comando se envió correctamente.
+
+23. **`float getTempC(const uint8_t*)`**: Devuelve la temperatura en grados Celsius del sensor con la dirección especificada.
+
+24. **`float getTempF(const uint8_t*)`**: Devuelve la temperatura en grados Fahrenheit del sensor con la dirección especificada.
+
+25. **`float getTempCByIndex(uint8_t)`**: Devuelve la temperatura en grados Celsius del sensor en el índice especificado.
+
+26. **`float getTempFByIndex(uint8_t)`**: Devuelve la temperatura en grados Fahrenheit del sensor en el índice especificado.
+
+27. **`bool isConversionComplete(void)`**: Devuelve `true` si todos los sensores han completado la conversión de temperatura.
+
+28. **`int16_t millisToWaitForConversion(uint8_t)`**: Devuelve el tiempo en milisegundos que se debe esperar para que la conversión de temperatura se complete, en función de la resolución configurada.
+
+29. **`void setUserData(const uint8_t*, int16_t)`**: Escribe un valor de datos de usuario en la memoria del sensor.
+
+30. **`int16_t getUserData(const uint8_t*)`**: Lee el valor de datos de usuario desde la memoria del sensor.
+
+31. **`void setHighAlarmTemp(const uint8_t*, int8_t)`**: Configura el valor de la alarma de alta temperatura para el sensor especificado.
+
+32. **`void setLowAlarmTemp(const uint8_t*, int8_t)`**: Configura el valor de la alarma de baja temperatura para el sensor especificado.
+
+33. **`int8_t getHighAlarmTemp(const uint8_t*)`**: Devuelve el valor de la alarma de alta temperatura para el sensor especificado.
+
+34. **`int8_t getLowAlarmTemp(const uint8_t*)`**: Devuelve el valor de la alarma de baja temperatura para el sensor especificado.
+
+35. **`void resetAlarmSearch(void)`**: Reinicia la búsqueda de alarmas.
+
+36. **`bool alarmSearch(uint8_t*)`**: Busca sensores que tengan una alarma activa y devuelve su dirección.
+
+37. **`bool hasAlarm(const uint8_t*)`**: Verifica si el sensor especificado tiene una alarma activa.
+
+38. **`bool hasAlarm(void)`**: Verifica si hay alguna alarma activa en cualquier sensor en el bus OneWire.
+
+39. **`bool isParasitePowerMode(void)`**: Devuelve `true` si los sensores están en modo de alimentación parasitaria, `false` si están en modo de alimentación externa.
+
+40. **`void setParasitePowerMode(bool)`**: Configura el modo de alimentación parasitaria. `true` para modo parasitario, `false` para alimentación externa.
+
+41. **`void _wireReset(void)`**: Reinicia el bus OneWire.
+
+42. **`void _wireSelect(const uint8_t*)`**: Selecciona el sensor con la dirección especificada en el bus OneWire.
+
+43. **`void _wireSkip(void)`**: Envía el comando de omisión de dirección en el bus OneWire, lo que significa que el comando siguiente se aplica a todos los sensores en el bus.
+
+44. **`void _wireWrite(uint8_t)`**: Escribe un byte en el bus OneWire.
+
+45. **`void _wireWrite_bytes(const uint8_t*, uint16_t)`**: Escribe varios bytes en el bus OneWire.
+
+46. **`uint8_t _wireRead(void)`**: Lee un byte del bus OneWire.
+
+47. **`void _wireRead_bytes(uint8_t*, uint16_t)`**: Lee varios bytes del bus OneWire.
+
+### Resumen
+
+Esta librería proporciona una interfaz rica y conveniente para interactuar con sensores de temperatura Dallas en el bus OneWire, permitiendo configurar, leer y gestionar múltiples sensores de manera eficiente.

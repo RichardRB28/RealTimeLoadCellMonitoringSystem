@@ -1,0 +1,70 @@
+#include <Arduino.h>
+// #include <EEPROM.h>
+#include <HX711_ADC.h>
+#include <SPIFFS.h> // Almacenamiento de archivo de configuracion
+#include <WiFi.h>
+#include <DNSServer.h>
+#include <ESPmDns.h>
+#include <ArduinoJson.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+#include <Preferences.h>
+#include <DallasTemperature.h>
+/*
+Archivos de definiciones
+*/
+#include "esp32_def_var.hpp"
+#include "esp32funtions.hpp"
+#include "esp32_settings.hpp"
+#include "esp32_wifi.hpp"
+#include "esp32_mqtt.hpp"
+#include "esp32_Webserver.hpp"
+#include "esp32_task.hpp"
+// put function declarations here:
+TaskHandle_t TaskWifi;
+TaskHandle_t TaskMqtt;
+TaskHandle_t TaskLectLC;
+TaskHandle_t Taskadmin;
+
+void setup()
+{
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, LOW);
+  Serial.begin(115200);
+  sensor.begin();
+  sensor.getAddress(sensorDeviceAddress, 0);
+  sensor.setResolution(sensorDeviceAddress, SENSOR_RESOLUTION);
+  log("INFO", "iniciado el setup");
+  if (!SPIFFS.begin(true))
+  {
+    log("ERROR", "fallo la inicializacion del SPIFFS");
+    while (true)
+      ;
+  }
+  log("INFO", "Iniciada correctamente memoria SPIFFS");
+  if (!settings_read())
+  {
+    log("INFO", "false return");
+    settings_save();
+  }
+
+xTaskCreate(TskAdmin, "Admintsk", 1024 * 5, NULL, 3, &Taskadmin);
+
+  wifi_setup();
+  // inicializar servidor
+  initserver();
+
+
+
+
+  xTaskCreate(wifitskreconnect, "wifitskrn", 1024 * 5, NULL, 3, &TaskWifi);
+  // conexion mqtt
+  xTaskCreate(mqttreconnect, "mqtttskrn", 1024 * 5, NULL, 2, &TaskMqtt);
+  // Tarea para lectura de celdas
+  xTaskCreate(ReadLoadcells, "lcrd", 1024 * 2, NULL, 2, &TaskLectLC);
+  // xTaskCreate(mqttreconnect,"mqtttskrn",1024*5,NULL, 2,NULL);
+}
+
+void loop()
+{
+}

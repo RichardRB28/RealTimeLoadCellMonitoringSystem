@@ -1,0 +1,61 @@
+FUNCIONAIDAD WIFI
+-Reconexion                                         (check)
+-Cambio de modo al desconectar el modo station      (check)
+
+
+FUNCIONALIDAD MQTT
+-Establecer conexiones al broker y reconexiones     (check)
+-Establecer users y password por cliente            (check)
+-Configurar topicos de:
+    *publicacion de datos                           (check)
+    *estado de conexion                             (check)
+-Cambiar intervalo de transmision de datos          (check)
+-Establecer formato de datos basico                 (check)
+-Establecer formato de datos encapsulado            (check)
+-Recepcion de datos desde el broker a ESP32         (check)
+- 
+
+
+
+FUNCIONALIDAD API_SERVER
+-Realizar index con credenciales de acceso         (check)
+-Peticion get data desde json                      (check)
+-Peticion post actualizar WIFI                     (check)
+-peticion get data info WIFI                       (check)
+-Scanear redes wifi
+-Peticion post para actualizar MQTT                (check)
+-Peticion get data para info MQTT                  (check)
+-Subir archivos de configuracion settings          (check)
+-Subir archivos de actualizacion firmware          (check)
+y fylesistem          
+-
+
+Funcionalidades ESP32
+-Lectura de datos desde los respectivos sensores
+-Leer archivo json desde broker para cambio de datos en salida (X)
+-Crear tareas para lectura de variables en paralelo
+-Crear funcionalidad de suministro de tipo de bascula, numero de celdas, mv por voltio, peso maximo.
+
+FrontEnd
+- Diseñar el index
+
+    SENSOR TEMPERATURA 
+            R1
+            GND VCC SGNL.
+
+
+    ROJO Y BLANCO ALIMENTACION
+    NEGRO Y VERDE SEÑAL
+
+    Secuencia de inicio
+    - crea tarea administradora
+
+- inicia wifi con servidor http local
+
+- configura el multiplexor y se ubica en el canal 0 y luego configura los sensores
+Se dirige a configurar los valores para el hx711, revisa el estado de cada celda, si estan calibradas o no, 
+luego si lo estan setea los valores de factor de calibracion para cada una y recupera los factores de calibracion. Por el contrario
+si no lo está coloca la variable conf_lc en 0 para que se calibren las celdas
+    - si se calibran se le pasa por parametro cuantas celdas hay y cada id de celda del vector añadiendo cada factor de calibracion en un for 
+    que realice la tara en cada celda y luego regrese al canal inicial para preguntar por el peso patron, luego va seteando uno a uno con el peso patron
+
